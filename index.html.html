@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upil | Personal Profile</title>
+    
+    <!-- Google Fonts for premium typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600&family=Pacifico&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons via CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        /* CSS RESET & VARIABLES */
+        :root {
+            --bg-outer: #0a0a0c;
+            --bg-safari-bar: #eaeaea;
+            --bg-safari-url: #ffffff;
+            --bg-navbar: #f8f8f8;
+            --bg-hero: #ededed;
+            --bg-card-blue: #e1ecf4;
+            --text-primary: #1a1a1a;
+            --text-secondary: #4a4a4a;
+            --text-lavender: #8e8d9f;
+            --text-muted: #a2a1b3;
+            --color-black: #000000;
+            --color-red: #ff5f56;
+            --color-yellow: #ffbd2e;
+            --color-green: #27c93f;
+            
+            --font-sans: 'Outfit', sans-serif;
+            --font-nav: 'Montserrat', sans-serif;
+            --font-script: 'Pacifico', cursive;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-outer);
+            background-image: radial-gradient(circle at 50% 50%, #1a1a24 0%, #0a0a0c 100%);
+            font-family: var(--font-sans);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+            overflow-x: hidden;
+        }
+
+        /* BROWSER WINDOW MOCKUP CONTAINER */
+        .browser-mockup {
+            width: 100%;
+            max-width: 1100px;
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* SAFARI TOP CHROME BAR */
+        .safari-header {
+            background: var(--bg-safari-bar);
+            height: 48px;
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            border-bottom: 1px solid #dcdcdc;
+            position: relative;
+        }
+
+        /* Dots on Left */
+        .safari-dots {
+            display: flex;
+            gap: 8px;
+        }
+
+        .safari-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .dot-close { background-color: var(--color-red); }
+        .dot-min { background-color: var(--color-yellow); }
+        .dot-expand { background-color: var(--color-green); }
+
+        /* Navigation buttons (left of URL) */
+        .safari-nav-buttons {
+            display: flex;
+            gap: 12px;
+            margin-left: 24px;
+            color: #8c8c8c;
+        }
+
+        .safari-nav-btn {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            transition: color 0.2s;
+        }
+
+        .safari-nav-btn:hover {
+            color: #444444;
+        }
+
+        /* URL Box in Center */
+        .safari-url-bar {
+            background: var(--bg-safari-url);
+            height: 28px;
+            width: 100%;
+            max-width: 500px;
+            border-radius: 6px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: var(--text-secondary);
+            font-family: var(--font-sans);
+            letter-spacing: 0.5px;
+            border: 1px solid #d1d1d1;
+        }
+
+        .safari-url-lock {
+            font-size: 11px;
+            margin-right: 6px;
+            color: #27c93f;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Icons on Right */
+        .safari-right-icons {
+            display: flex;
+            gap: 16px;
+            color: #8c8c8c;
+            margin-left: auto;
+        }
+
+        .safari-icon {
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .safari-icon:hover {
+            color: #444444;
+        }
+
+        /* WEBPAGE NAVBAR */
+        .web-navbar {
+            background: var(--bg-navbar);
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-bottom: 1px solid #ededed;
+        }
+
+        .web-nav-links {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 0 10px;
+        }
+
+        .web-nav-link {
+            font-family: var(--font-nav);
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.2em;
+            text-decoration: none;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            padding: 8px 0;
+            position: relative;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .web-nav-link:hover {
+            color: var(--color-black);
+        }
+
+        .web-nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 1px;
+            background: var(--color-black);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .web-nav-link.active {
+            color: var(--color-black);
+            font-weight: 600;
+        }
+
+        .web-nav-link.active::after {
+            width: 70%;
+        }
+
+        /* WEB CONTENT MAIN SCROLLABLE CONTAINER */
+        .web-content {
+            overflow-y: auto;
+            max-height: 70vh;
+            display: flex;
+            flex-direction: column;
+            scroll-behavior: smooth;
+        }
+
+        /* HERO BANNER SECTION */
+        .hero-section {
+            background-color: var(--bg-hero);
+            height: 420px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            overflow: hidden;
+        }
+
+        .hero-img-container {
+            height: 100%;
+            width: 100%;
+            max-width: 380px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+        }
+
+        .hero-img {
+            max-height: 95%;
+            max-width: 100%;
+            object-fit: contain;
+            display: block;
+            image-rendering: -webkit-optimize-contrast;
+        }
+
+        /* Scroll indicator (left-aligned) */
+        .scroll-indicator {
+            position: absolute;
+            left: 35px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            opacity: 0.6;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        .scroll-mouse {
+            width: 20px;
+            height: 32px;
+            border: 2px solid var(--text-secondary);
+            border-radius: 12px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+        }
+
+        .scroll-wheel {
+            width: 2px;
+            height: 6px;
+            background-color: var(--text-secondary);
+            border-radius: 1px;
+            position: absolute;
+            top: 6px;
+            animation: scrollWheelAnim 2s infinite;
+        }
+
+        .scroll-arrow {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--text-secondary);
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+        .scroll-text {
+            font-family: var(--font-nav);
+            font-size: 8px;
+            font-weight: 600;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            writing-mode: vertical-lr;
+            transform: rotate(180deg);
+            color: var(--text-secondary);
+            margin-top: 5px;
+        }
+
+        @keyframes scrollWheelAnim {
+            0% { top: 6px; opacity: 1; }
+            50% { top: 12px; opacity: 0.2; }
+            100% { top: 6px; opacity: 1; }
+        }
+
+        /* WELCOME CARD SECTION */
+        .welcome-section {
+            background-color: var(--bg-card-blue);
+            padding: 70px 40px 60px 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+            position: relative;
+        }
+
+        .welcome-title {
+            font-family: var(--font-script);
+            font-size: 64px;
+            font-weight: normal;
+            color: var(--color-black);
+            margin-bottom: 25px;
+            line-height: 1.1;
+        }
+
+        .welcome-main-text {
+            font-size: 20px;
+            font-weight: 300;
+            color: var(--text-lavender);
+            max-width: 600px;
+            line-height: 1.6;
+            margin-bottom: 18px;
+        }
+
+        .welcome-sub-text {
+            font-size: 14px;
+            font-weight: 400;
+            color: var(--text-muted);
+            max-width: 500px;
+            line-height: 1.5;
+            margin-bottom: 35px;
+        }
+
+        .welcome-dot {
+            width: 6px;
+            height: 6px;
+            background-color: var(--color-black);
+            border-radius: 50%;
+        }
+
+        /* DYNAMIC TABS CONTENT / SECTIONS */
+        .tab-panel {
+            display: none;
+            padding: 50px 30px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .tab-panel.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ABOUT TAB DETAILS */
+        .profile-details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .detail-card {
+            background: #ffffff;
+            border: 1px solid #eaeaea;
+            border-radius: 12px;
+            padding: 30px 24px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .detail-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        .card-icon-wrapper {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #f4f6f8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 18px;
+            color: #333333;
+        }
+
+        .detail-card h3 {
+            font-family: var(--font-nav);
+            font-size: 13px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+        }
+
+        .detail-card p {
+            font-size: 20px;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        /* Sleek Dark Card for Favorite Color */
+        .detail-card.card-favorite-color {
+            background: #111115;
+            border-color: #222228;
+            color: #ffffff;
+        }
+
+        .detail-card.card-favorite-color .card-icon-wrapper {
+            background: #22222b;
+            color: #ffffff;
+        }
+
+        .detail-card.card-favorite-color p {
+            color: #ffffff;
+        }
+
+        .color-badge {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            background: #000;
+            border: 2px solid #fff;
+            border-radius: 50%;
+            margin-left: 8px;
+            vertical-align: middle;
+            box-shadow: 0 0 5px rgba(255,255,255,0.2);
+        }
+
+        /* GALLERY TAB */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            aspect-ratio: 1;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            background: #f0f0f0;
+            border: 1px solid #e2e2e2;
+            cursor: pointer;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.02);
+            transition: all 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.03);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.08);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.4);
+            opacity: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            font-size: 12px;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        /* FAQ TAB */
+        .faq-container {
+            max-width: 700px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .faq-item {
+            border: 1px solid #eaeaea;
+            border-radius: 8px;
+            overflow: hidden;
+            background: white;
+        }
+
+        .faq-question {
+            padding: 18px 24px;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+            background: #fafafa;
+            transition: background-color 0.2s;
+        }
+
+        .faq-question:hover {
+            background-color: #f5f5f5;
+        }
+
+        .faq-answer {
+            padding: 0 24px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            color: var(--text-secondary);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .faq-item.open .faq-answer {
+            padding: 18px 24px;
+            max-height: 200px;
+            border-top: 1px solid #eaeaea;
+        }
+
+        .faq-icon {
+            transition: transform 0.3s;
+        }
+
+        .faq-item.open .faq-icon {
+            transform: rotate(180deg);
+        }
+
+        /* CONTACT TAB */
+        .contact-container {
+            max-width: 500px;
+            margin: 0 auto;
+            background: white;
+            border: 1px solid #eaeaea;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            text-align: left;
+        }
+
+        .form-group label {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+        }
+
+        .form-group input, .form-group textarea {
+            padding: 12px 16px;
+            border: 1px solid #dcdcdc;
+            border-radius: 8px;
+            font-family: var(--font-sans);
+            font-size: 14px;
+            transition: all 0.3s;
+            outline: none;
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            border-color: var(--color-black);
+            box-shadow: 0 0 0 3px rgba(0,0,0,0.05);
+        }
+
+        .submit-btn {
+            background-color: var(--color-black);
+            color: white;
+            border: none;
+            padding: 14px 20px;
+            font-family: var(--font-nav);
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.2s, transform 0.1s;
+        }
+
+        .submit-btn:hover {
+            background-color: #222222;
+        }
+
+        .submit-btn:active {
+            transform: scale(0.98);
+        }
+
+        /* RESPONSIVE DESIGN */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .browser-mockup {
+                border-radius: 12px;
+            }
+
+            .safari-url-bar {
+                max-width: 180px;
+            }
+
+            .safari-nav-buttons, .safari-right-icons {
+                display: none;
+            }
+
+            .web-nav-links {
+                gap: 15px;
+            }
+
+            .web-nav-link {
+                font-size: 10px;
+                letter-spacing: 0.15em;
+            }
+
+            .hero-section {
+                height: 320px;
+            }
+
+            .hero-img-container {
+                max-width: 260px;
+            }
+
+            .scroll-indicator {
+                left: 15px;
+            }
+
+            .welcome-title {
+                font-size: 48px;
+            }
+
+            .welcome-main-text {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SAFARI BROWSER WRAPPER -->
+    <div class="browser-mockup">
+        
+        <!-- SAFARI TOP CHROMES -->
+        <header class="safari-header">
+            <div class="safari-dots">
+                <div class="safari-dot dot-close"></div>
+                <div class="safari-dot dot-min"></div>
+                <div class="safari-dot dot-expand"></div>
+            </div>
+            
+            <div class="safari-nav-buttons">
+                <div class="safari-nav-btn"><i data-lucide="chevron-left"></i></div>
+                <div class="safari-nav-btn"><i data-lucide="chevron-right"></i></div>
+            </div>
+            
+            <div class="safari-url-bar">
+                <span class="safari-url-lock"><i data-lucide="lock" style="width: 11px; height: 11px;"></i></span>
+                upil.id
+            </div>
+            
+            <div class="safari-right-icons">
+                <div class="safari-icon"><i data-lucide="upload" style="width: 16px; height: 16px;"></i></div>
+                <div class="safari-icon"><i data-lucide="plus" style="width: 16px; height: 16px;"></i></div>
+                <div class="safari-icon"><i data-lucide="layers" style="width: 16px; height: 16px;"></i></div>
+            </div>
+        </header>
+
+        <!-- WEBSITE NAVBAR -->
+        <nav class="web-navbar">
+            <ul class="web-nav-links">
+                <li><a class="web-nav-link active" onclick="switchTab('home', this)">Home</a></li>
+                <li><a class="web-nav-link" onclick="switchTab('about', this)">About</a></li>
+                <li><a class="web-nav-link" onclick="switchTab('gallery', this)">Gallery</a></li>
+                <li><a class="web-nav-link" onclick="switchTab('faq', this)">FAQ</a></li>
+                <li><a class="web-nav-link" onclick="switchTab('contact', this)">Contact</a></li>
+            </ul>
+        </nav>
+
+        <!-- WEB CONTENT SCROLLABLE AREA -->
+        <main class="web-content" id="webMain">
+            
+            <!-- HOME TAB (HERO + WELCOME CARD) -->
+            <div id="tab-home" class="tab-panel active" style="padding: 0;">
+                
+                <!-- HERO SECTION -->
+                <section class="hero-section">
+                    
+                    <!-- Left Scroll Indicator -->
+                    <div class="scroll-indicator">
+                        <div class="scroll-mouse">
+                            <span class="scroll-wheel"></span>
+                        </div>
+                        <div class="scroll-arrow">
+                            <i data-lucide="chevron-up" style="width: 12px; height: 12px; margin-bottom: -4px;"></i>
+                        </div>
+                        <div class="scroll-text">Scroll</div>
+                    </div>
+                    
+                    <!-- Centered Profile Image -->
+                    <div class="hero-img-container">
+                        <img src="IMAGES/WhatsApp Image 2026-05-19 at 19.38.20.jpeg" alt="Upil Profile Photo" class="hero-img">
+                    </div>
+                </section>
+                
+                <!-- WELCOME CARD -->
+                <section class="welcome-section">
+                    <h1 class="welcome-title">Welcome!</h1>
+                    <p class="welcome-main-text">
+                        Ini adalah tempat bagi Upil untuk membagikan petualangan kuliner, 
+                        mengeksplorasi kecintaannya pada warna hitam, dan mengekspresikan diri.
+                    </p>
+                    <p class="welcome-sub-text">
+                        Jelajahi halaman profil Upil untuk menemukan hobi, info detail, galeri makanan favorit, dan hubungi kami langsung.
+                    </p>
+                    <div class="welcome-dot"></div>
+                </section>
+            </div>
+
+            <!-- ABOUT TAB -->
+            <div id="tab-about" class="tab-panel">
+                <div style="text-align: center; margin-bottom: 40px;">
+                    <h2 style="font-family: var(--font-nav); font-size: 24px; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 10px;">About Upil</h2>
+                    <p style="color: var(--text-lavender); max-width: 500px; margin: 0 auto; font-size: 14px;">Kenali profil lengkap dan preferensi unik dari Upil.</p>
+                </div>
+                
+                <div class="profile-details-grid">
+                    <!-- Name Card -->
+                    <div class="detail-card">
+                        <div class="card-icon-wrapper">
+                            <i data-lucide="user"></i>
+                        </div>
+                        <h3>Nama Lengkap</h3>
+                        <p>Upil</p>
+                    </div>
+
+                    <!-- Age Card -->
+                    <div class="detail-card">
+                        <div class="card-icon-wrapper">
+                            <i data-lucide="calendar"></i>
+                        </div>
+                        <h3>Umur</h3>
+                        <p>20 Tahun</p>
+                    </div>
+
+                    <!-- Hobby Card -->
+                    <div class="detail-card">
+                        <div class="card-icon-wrapper">
+                            <i data-lucide="utensils"></i>
+                        </div>
+                        <h3>Hobi Utama</h3>
+                        <p>Makan</p>
+                    </div>
+
+                    <!-- Favorite Color Card (Styled Dark) -->
+                    <div class="detail-card card-favorite-color">
+                        <div class="card-icon-wrapper">
+                            <i data-lucide="palette"></i>
+                        </div>
+                        <h3>Warna Favorit</h3>
+                        <p>Hitam <span class="color-badge"></span></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GALLERY TAB -->
+            <div id="tab-gallery" class="tab-panel">
+                <div style="text-align: center; margin-bottom: 40px;">
+                    <h2 style="font-family: var(--font-nav); font-size: 24px; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 10px;">Gallery Makanan</h2>
+                    <p style="color: var(--text-lavender); max-width: 500px; margin: 0 auto; font-size: 14px;">Representasi hobi makan Upil dengan berbagai pilihan hidangan lezat.</p>
+                </div>
+
+                <div class="gallery-grid">
+                    <!-- Food Item 1 -->
+                    <div class="gallery-item" onclick="alert('Indomie Goreng - Makanan favorit sejuta umat!')">
+                        <img src="https://images.unsplash.com/photo-1612927601601-6638404737ce?w=500&auto=format&fit=crop&q=60" alt="Indomie">
+                        <div class="gallery-overlay">Indomie Goreng</div>
+                    </div>
+                    <!-- Food Item 2 -->
+                    <div class="gallery-item" onclick="alert('Nasi Goreng Spesial - Lezat dan mengenyangkan.')">
+                        <img src="https://images.unsplash.com/photo-1603133872878-696dbb88ace3?w=500&auto=format&fit=crop&q=60" alt="Nasi Goreng">
+                        <div class="gallery-overlay">Nasi Goreng</div>
+                    </div>
+                    <!-- Food Item 3 -->
+                    <div class="gallery-item" onclick="alert('Sate Ayam - Daging ayam panggang bumbu kacang gurih.')">
+                        <img src="https://images.unsplash.com/photo-1529042410759-befb1204b468?w=500&auto=format&fit=crop&q=60" alt="Sate Ayam">
+                        <div class="gallery-overlay">Sate Ayam</div>
+                    </div>
+                    <!-- Food Item 4 -->
+                    <div class="gallery-item" onclick="alert('Bakso Sapi - Bola daging kuah kaldu hangat.')">
+                        <img src="https://images.unsplash.com/photo-1541518763669-27fef04b14ea?w=500&auto=format&fit=crop&q=60" alt="Bakso">
+                        <div class="gallery-overlay">Bakso Kuah</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ TAB -->
+            <div id="tab-faq" class="tab-panel">
+                <div style="text-align: center; margin-bottom: 40px;">
+                    <h2 style="font-family: var(--font-nav); font-size: 24px; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 10px;">Frequently Asked Questions</h2>
+                    <p style="color: var(--text-lavender); max-width: 500px; margin: 0 auto; font-size: 14px;">Pertanyaan yang sering diajukan mengenai Upil.</p>
+                </div>
+
+                <div class="faq-container">
+                    <div class="faq-item" onclick="toggleFaq(this)">
+                        <div class="faq-question">
+                            <span>Siapakah Upil?</span>
+                            <i data-lucide="chevron-down" class="faq-icon" style="width: 18px; height: 18px;"></i>
+                        </div>
+                        <div class="faq-answer">
+                            Upil adalah seorang pemuda berusia 20 tahun yang senang berpetualang kuliner dan menikmati seni estetika minimalis hitam.
+                        </div>
+                    </div>
+
+                    <div class="faq-item" onclick="toggleFaq(this)">
+                        <div class="faq-question">
+                            <span>Apa makanan favorit Upil?</span>
+                            <i data-lucide="chevron-down" class="faq-icon" style="width: 18px; height: 18px;"></i>
+                        </div>
+                        <div class="faq-answer">
+                            Upil menyukai semua jenis makanan lezat, mulai dari kuliner nusantara seperti Nasi Goreng dan Sate hingga mie instan!
+                        </div>
+                    </div>
+
+                    <div class="faq-item" onclick="toggleFaq(this)">
+                        <div class="faq-question">
+                            <span>Mengapa Upil menyukai warna Hitam?</span>
+                            <i data-lucide="chevron-down" class="faq-icon" style="width: 18px; height: 18px;"></i>
+                        </div>
+                        <div class="faq-answer">
+                            Hitam melambangkan kesederhanaan, kekuatan, keanggunan, serta kecocokan universal dengan segala elemen desain.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CONTACT TAB -->
+            <div id="tab-contact" class="tab-panel">
+                <div style="text-align: center; margin-bottom: 40px;">
+                    <h2 style="font-family: var(--font-nav); font-size: 24px; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 10px;">Kirim Pesan</h2>
+                    <p style="color: var(--text-lavender); max-width: 500px; margin: 0 auto; font-size: 14px;">Hubungi Upil melalui formulir di bawah ini.</p>
+                </div>
+
+                <div class="contact-container">
+                    <form onsubmit="event.preventDefault(); alert('Pesan Anda berhasil dikirim!'); this.reset();">
+                        <div class="form-group">
+                            <label for="name">Nama</label>
+                            <input type="text" id="name" required placeholder="Masukkan nama Anda">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" required placeholder="nama@email.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Pesan</label>
+                            <textarea id="message" rows="4" required placeholder="Tuliskan pesan Anda di sini..."></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Kirim Pesan</button>
+                    </form>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- INITIALIZE ICONS & TAB LOGIC -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Switch Active Tabs
+        function switchTab(tabId, element) {
+            // Update Active Link State
+            const links = document.querySelectorAll('.web-nav-link');
+            links.forEach(link => link.classList.remove('active'));
+            element.classList.add('active');
+
+            // Hide all tab panels
+            const panels = document.querySelectorAll('.tab-panel');
+            panels.forEach(panel => panel.classList.remove('active'));
+
+            // Show active panel
+            const activePanel = document.getElementById('tab-' + tabId);
+            if (activePanel) {
+                activePanel.classList.add('active');
+            }
+
+            // Scroll content area back to top
+            document.getElementById('webMain').scrollTop = 0;
+        }
+
+        // Toggle Accordion FAQ
+        function toggleFaq(element) {
+            const isOpen = element.classList.contains('open');
+            // Close all first
+            const faqItems = document.querySelectorAll('.faq-item');
+            faqItems.forEach(item => item.classList.remove('open'));
+            
+            // Toggle clicked item
+            if (!isOpen) {
+                element.classList.add('open');
+            }
+        }
+    </script>
+</body>
+</html>
